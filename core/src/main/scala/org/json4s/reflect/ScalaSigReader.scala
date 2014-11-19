@@ -189,7 +189,7 @@ object ScalaSigReader {
     case many => {
       try {
         var clazz: Class[_] = null
-        val iter = many.iterator
+        val iter = (many.toSeq :+ Thread.currentThread().getContextClassLoader).iterator
         while (clazz == null && iter.hasNext) {
           try {
             clazz = Class.forName(c, true, iter.next())
